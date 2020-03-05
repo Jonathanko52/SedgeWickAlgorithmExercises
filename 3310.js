@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 // //3.1.1
 
 // let GradeTable = {};
@@ -92,3 +94,97 @@
 // illustrated on page 367.
 
 // Sedgewick, Robert. Algorithms (p. 389). Pearson Education. Kindle Edition. '
+
+// let TimeTable = function() {
+//   this.storage = {};
+//   this.put = (key, value) => {
+//     key = JSON.stringify(key);
+//     this.storage[key] = value;
+//   };
+//   this.get = key => {
+//     key = JSON.stringify(key);
+//     return this.storage[key];
+//   };
+// };
+
+//3.1.5
+// function createLinkedList() {
+//   let newList = null;
+//   newList = new node(1, "a");
+//   newList.next = new node(2, "b");
+//   newList.next.next = new node(3, "c");
+//   return newList;
+// }
+// let node = function(value, key, next) {
+//   this.value = value;
+//   this.key = key;
+//   this.next = null;
+// };
+// function LinkedList() {
+//   this.storage = createLinkedList();
+//   this.size = () => {
+//     let count = 0;
+//     let step = this.storage;
+//     while (step) {
+//       count++;
+//       step = step.next;
+//     }
+//     return count;
+//   };
+//   this.delete = key => {
+//     let step = this.storage;
+//     while (step) {
+//       if (step.next && step.next.key === key) {
+//         step.next = step.next.next;
+//       } else {
+//         step = step.next;
+//       }
+//     }
+//   };
+//   this.keys = () => {
+//     let array = [];
+//     let step = this.storage;
+//     while (step) {
+//       array.push(step.key);
+//       step = step.next;
+//     }
+//     return array;
+//   };
+// }
+// let testList = new LinkedList();
+// console.log(testList.size());
+// testList.delete("b");
+// console.log(testList.size());
+// console.log(testList.keys());
+
+//3.1.6
+
+let frequencyCounter = function () {
+  this.storage = {};
+  this.put = key => {
+    if (this.storage[key]) {
+      this.storage[key]++;
+    } else {
+      this.storage[key] = 1;
+    }
+  };
+  this.get = () => { };
+};
+frequencyCounter = new frequencyCounter();
+
+fs.readFile("tale.txt", "utf8", (err, data) => {
+  if (err) {
+    throw err;
+  }
+  data.split("\n").forEach(cur => {
+    cur.split(' ').forEach(cur1 => {
+      if (cur1.length >= 10) {
+        frequencyCounter.put(cur1);
+      }
+    })
+  });
+  console.log(frequencyCounter.storage);
+});
+//3.1.7
+//3.1.8
+//3.1.9
