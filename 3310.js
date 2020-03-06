@@ -159,32 +159,55 @@ const fs = require("fs");
 
 //3.1.6
 
-let frequencyCounter = function () {
-  this.storage = {};
-  this.put = key => {
-    if (this.storage[key]) {
-      this.storage[key]++;
-    } else {
-      this.storage[key] = 1;
-    }
-  };
-  this.get = () => { };
-};
-frequencyCounter = new frequencyCounter();
+// function frequencyCounter(lengthCutoff) {
+//   this.data
+//   this.lengthCutoff = lengthCutoff;
+//   this.storage = {};
+//   this.lastInserted = ''
+//   this.priorInsertedCount = 0
+//   this.put = key => {
+//     if (key.length >= this.lengthCutoff)
+//       if (this.storage[key]) {
+//         this.storage[key]++;
+//       } else {
+//         this.storage[key] = 1;
+//       }
+//   };
+//   this.get = () => {
+//     fs.readFile("tale.txt", "utf8", (err, data) => {
+//       if (err) {
+//         throw err;
+//       }
+//       data.split("\n").forEach(cur => {
+//         cur.split(' ').forEach(cur1 => {
+//           this.put(cur1);
+//         })
+//       });
 
-fs.readFile("tale.txt", "utf8", (err, data) => {
-  if (err) {
-    throw err;
-  }
-  data.split("\n").forEach(cur => {
-    cur.split(' ').forEach(cur1 => {
-      if (cur1.length >= 10) {
-        frequencyCounter.put(cur1);
-      }
-    })
-  });
-  console.log(frequencyCounter.storage);
-});
-//3.1.7
-//3.1.8
-//3.1.9
+//       for (keys in this.storage) {
+//         if (this.longestCount < this.storage[keys]) {
+//           this.longestCount = this.storage[keys]
+//           this.longestWord = keys
+//         }
+//       };
+//       console.log(this.longestCount)
+//       console.log(this.longestWord)
+//     });
+//   }
+//   this.longestWord = 'test'
+//   this.longestCount = Math.max()
+// }
+
+// frequencyCounter10 = new frequencyCounter();
+
+// //3.1.7
+// //3.1.8
+// frequencyCounter10 = new frequencyCounter(10);
+// frequencyCounter10.get()
+
+// //3.1.9;
+
+// frequencyCounter1 = new frequencyCounter(1);
+// frequencyCounter1.get()
+// frequencyCounter8 = new frequencyCounter(8);
+// frequencyCounter8.get()
