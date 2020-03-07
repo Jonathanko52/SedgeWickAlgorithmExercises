@@ -211,3 +211,98 @@ const fs = require("fs");
 // frequencyCounter1.get()
 // frequencyCounter8 = new frequencyCounter(8);
 // frequencyCounter8.get()
+
+// 3.1.12
+
+function mergeSort(unsortedArray) {
+  // No need to sort the array if the array only has one element or empty
+  if (unsortedArray.length <= 1) {
+    return unsortedArray;
+  }
+  // In order to divide the array in half, we need to figure out the middle
+  const middle = Math.floor(unsortedArray.length / 2);
+
+  // This is where we will be dividing the array into left and right
+  const left = unsortedArray.slice(0, middle);
+  const right = unsortedArray.slice(middle);
+
+  // Using recursion to combine the left and right
+  return merge(
+    mergeSort(left), mergeSort(right)
+  );
+
+}
+function merge(left, right) {
+  let resultArray = [], leftIndex = 0, rightIndex = 0;
+
+  // We will concatenate values into the resultArray in order
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex][1] < right[rightIndex][1]) {
+      resultArray.push(left[leftIndex]);
+      leftIndex++; // move left array cursor
+    } else {
+      resultArray.push(right[rightIndex]);
+      rightIndex++; // move right array cursor
+    }
+  }
+
+  // We need to concat here because there will be one element remaining
+  // from either left OR the right
+  return resultArray
+    .concat(left.slice(leftIndex))
+    .concat(right.slice(rightIndex));
+}
+
+let BinarySearchST = function () {
+  this.storage = [];
+  this.put = (key, value) => {
+    let alreadyInStorage = false
+    this.storage.forEach((cur) => {
+      if (cur[0] === key) {
+        cur[1] = value
+        alreadyInStorage = true;
+      }
+    })
+    if (!alreadyInStorage) {
+      this.storage.push([key, value])
+    }
+    this.storage = mergeSort(this.storage)
+  }
+  this.get = (key) => {
+    let returnVal = 'invalid'
+    this.storage.forEach((cur) => {
+      if (cur[0] === key) {
+        returnVal = cur[1]
+      }
+    })
+    return returnVal
+  }
+}
+
+let newBinarySearchST = new BinarySearchST
+newBinarySearchST.put('one', 1)
+newBinarySearchST.put('two', 2)
+newBinarySearchST.put('five', 5)
+newBinarySearchST.put('three', 3)
+
+
+//3.1.13
+
+//3.1.16
+
+BinarySearchST.prototype.delete = function (key) {
+  this.storage.forEach((cur, ind) => {
+    if (cur[0] === key) {
+      this.storage.splice(ind, 1)
+    }
+  })
+}
+newBinarySearchST.delete('three')
+console.log(newBinarySearchST.storage)
+
+// //3.1.17
+// BinarySearchST.prototype.floor
+
+// //3.1.18
+// BinarySearchST.prototype.rank
+
