@@ -290,15 +290,15 @@ newBinarySearchST.put('three', 3)
 
 //3.1.16
 
-BinarySearchST.prototype.delete = function (key) {
-  this.storage.forEach((cur, ind) => {
-    if (cur[0] === key) {
-      this.storage.splice(ind, 1)
-    }
-  })
-}
-newBinarySearchST.delete('three')
-console.log(newBinarySearchST.storage)
+// BinarySearchST.prototype.delete = function (key) {
+//   this.storage.forEach((cur, ind) => {
+//     if (cur[0] === key) {
+//       this.storage.splice(ind, 1)
+//     }
+//   })
+// }
+// newBinarySearchST.delete('three')
+// console.log(newBinarySearchST.storage)
 
 // //3.1.17
 // BinarySearchST.prototype.floor
@@ -306,3 +306,30 @@ console.log(newBinarySearchST.storage)
 // //3.1.18
 // BinarySearchST.prototype.rank
 
+//3.1.19
+
+frequencyCounter.prototype.get = () => {
+  fs.readFile("tale.txt", "utf8", (err, data) => {
+    if (err) {
+      throw err;
+    }
+    data.split("\n").forEach(cur => {
+      cur.split(' ').forEach(cur1 => {
+        this.put(cur1);
+      })
+    });
+
+    for (keys in this.storage) {
+      if (this.longestCount < this.storage[keys]) {
+        this.longestCount = this.storage[keys]
+        this.longestWord = keys
+      }
+      if (this.longestCount === this.storage[keys]) {
+        this.longestWord += keys
+
+      }
+    };
+    console.log(this.longestCount)
+    console.log(this.longestWord)
+  });
+}
